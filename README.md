@@ -13,8 +13,8 @@
  　■  pip　実行<br>
   　　　コマンドプロンプトで、以下を実行
      <br>
-     　　python -m pip install fastapi
+python -m pip install fastapi
      <br>
-       　python -m pip install pyyaml
+python -m pip install pyyaml
      <br>
-         python -m pip install opencv-python
+python -m pip install opencv-python
