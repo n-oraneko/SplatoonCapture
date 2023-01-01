@@ -1,0 +1,208 @@
+﻿<mah:MetroWindow x:Class="SplatoonCapture.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:local="clr-namespace:SplatoonCapture"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200" MinWidth="600" MinHeight="800" Closing="MetroWindow_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Foreground" Value="SkyBlue"/>
+                <Setter Property="BorderBrush" Value="SkyBlue"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                    <Trigger Property="SortDirection" Value="Ascending">
+                        <Setter Property="Foreground" Value="red" />
+                    </Trigger>
+                    <Trigger Property="SortDirection" Value="Descending">
+                        <Setter Property="Foreground" Value="MediumPurple"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource MaterialDesignDarkBackground}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightSkyBlue" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightSkyBlue" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TabControl materialDesign:ColorZoneAssist.Mode="PrimaryDark" materialDesign:ElevationAssist.Elevation="Dp12" Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Top">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Waveform" />
+                        <TextBlock HorizontalAlignment="Center" Text="キャプチャ" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" MinWidth="300"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="1*" MinWidth="300"/>
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="White" />
+                    <TabControl materialDesign:ColorZoneAssist.Mode="Dark" materialDesign:ElevationAssist.Elevation="Dp12" Style="{StaticResource MaterialDesignNavigationRailTabControl}" Grid.Column="0">
+                        <TabItem>
+                            <TabItem.Header>
+                                <StackPanel Width="auto" Height="auto">
+                                    <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Karate" />
+                                    <TextBlock HorizontalAlignment="Center" Text="キル集" />
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid >
+                                <DataGrid materialDesign:DataGridAssist.SelectedCellBorderBrush="SkyBlue"
+                  x:Name="captureKillDataGrid"
+                  ItemsSource="{Binding Path=CapKillItems}" CanUserAddRows="True" 
+                  Background="{x:Null}" Foreground="#DDFFFFFF" Margin="10"
+                  AutoGenerateColumns="False">
+
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="No." Binding="{Binding Path=No}"/>
+                                        <DataGridTemplateColumn Header="start">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <Button x:Name="trimStartButton" Style="{StaticResource MaterialDesignIconForegroundButton}" Background="{DynamicResource MaterialDesignDataGridRowHoverBackground}" Foreground="#FF4ED6F9" Height="23" Width="27" Click="trimKillStartButton_Click">
+                                                        <materialDesign:PackIcon Kind="Play" Width="18" Height="18"/>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="name" Binding="{Binding Path=Name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem>
+                            <TabItem.Header>
+                                <StackPanel Width="auto" Height="auto">
+                                    <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Coffin" />
+                                    <TextBlock HorizontalAlignment="Center" Text="デス集" />
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid >
+                                <DataGrid materialDesign:DataGridAssist.SelectedCellBorderBrush="SkyBlue"
+                  x:Name="captureDeathDataGrid"
+                  ItemsSource="{Binding Path=CapDeathItems}" CanUserAddRows="True" 
+                  Background="{x:Null}" Foreground="#DDFFFFFF" Margin="10"
+                  AutoGenerateColumns="False">
+
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="No." Binding="{Binding Path=No}"/>
+                                        <DataGridTemplateColumn Header="start">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <Button x:Name="trimStartButton" Style="{StaticResource MaterialDesignIconForegroundButton}" Background="{DynamicResource MaterialDesignDataGridRowHoverBackground}" Foreground="#FF4ED6F9" Height="23" Width="27" Click="trimDeathStartButton_Click">
+                                                        <materialDesign:PackIcon Kind="Play" Width="18" Height="18"/>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="name" Binding="{Binding Path=Name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem>
+                            <TabItem.Header>
+                                <StackPanel Width="auto" Height="auto">
+                                    <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="FishOff" />
+                                    <TextBlock HorizontalAlignment="Center" Text="サーモン" />
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid >
+                                <DataGrid materialDesign:DataGridAssist.SelectedCellBorderBrush="SkyBlue"
+                  x:Name="captureSalmonDeathDataGrid"
+                  ItemsSource="{Binding Path=CapSalmonDeathItems}" CanUserAddRows="True" 
+                  Background="{x:Null}" Foreground="#DDFFFFFF" Margin="10"
+                  AutoGenerateColumns="False">
+
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="No." Binding="{Binding Path=No}"/>
+                                        <DataGridTemplateColumn Header="start">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <Button x:Name="trimStartButton" Style="{StaticResource MaterialDesignIconForegroundButton}" Background="{DynamicResource MaterialDesignDataGridRowHoverBackground}" Foreground="#FF4ED6F9" Height="23" Width="27" Click="trimSalmonDeathStartButton_Click">
+                                                        <materialDesign:PackIcon Kind="Play" Width="18" Height="18"/>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="name" Binding="{Binding Path=Name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                    <DockPanel Grid.Column="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBox x:Name="saveNameTextBox"  Margin="10" materialDesign:HintAssist.Hint="SaveName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" Margin="20 20 20 5">
+                                    <TextBlock Text="Capture board id (device id)" Margin=" 0 3"></TextBlock>
+                                    <ComboBox x:Name="captureBoardIdComboBox" Text="id" Margin="10 -10 0 0">
+                                        <ComboBoxItem IsSelected="True" Content="0" />
+                                        <ComboBoxItem Content="1" />
+                                        <ComboBoxItem Content="2" />
+                                        <ComboBoxItem Content="3" />
+                                        <ComboBoxItem Content="4" />
+                                        <ComboBoxItem Content="5" />
+                                    </ComboBox>
+                                    <TextBlock Text="Record FPS" Margin="20 5 0 5"/>
+                                    <Slider x:Name="fpsSlider" Width="200" Margin="5" TickFrequency="1" Style="{StaticResource MaterialDesignDiscreteSlider}" TickPlacement="TopLeft" Minimum="1" Maximum="45" Value="30" SelectionStart="20" SelectionEnd="30" IsSelectionRangeEnabled="True" HorizontalAlignment="Stretch" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="captureStartButton" Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 -20" Panel.ZIndex="1" Click="captureStartButton_Click">
+                                <materialDesign:PackIcon Kind="Play" />
+                            </Button>
+                            <materialDesign:Card Margin="15 0 15 15" Grid.Row="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <WindowsFormsHost x:Name="captureBoardWIndowFormHost" Grid.Row="0" Margin="20" MinWidth="200" MinHeight="100">
+                                        <forms:Control x:Name="captureBoardHost" SizeChanged="captureBoardHost_SizeChanged" />
+                                    </WindowsFormsHost>
+                                    <WindowsFormsHost x:Name="captureBoardTrimWIndowFormHost" Grid.Row="1" Margin="20" MinWidth="200" MinHeight="100">
+                                        <forms:Control x:Name="captureBoardTrimHost" />
+                                    </WindowsFormsHost>
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Gear" />
+                        <TextBlock HorizontalAlignment="Center" Text="設定" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid >
+                    <TextBlock Margin="20" Text="特になし。いまのとこ"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <materialDesign:Snackbar x:Name="snackbarNotice" MessageQueue="{materialDesign:MessageQueue}" Panel.ZIndex="10"/>
+    </Grid>
+</mah:MetroWindow>

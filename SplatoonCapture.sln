@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplatoonCapture", "SplatoonCapture\SplatoonCapture.csproj", "{A20AC754-8A5D-431F-BE61-3A7C76F71C97}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "AnalyzeSplatoon", "AnalyzeSplatoon\AnalyzeSplatoon.pyproj", "{16B522DF-0896-42BF-8018-4A41C9B8D930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A20AC754-8A5D-431F-BE61-3A7C76F71C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A20AC754-8A5D-431F-BE61-3A7C76F71C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A20AC754-8A5D-431F-BE61-3A7C76F71C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A20AC754-8A5D-431F-BE61-3A7C76F71C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16B522DF-0896-42BF-8018-4A41C9B8D930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B522DF-0896-42BF-8018-4A41C9B8D930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CBB432B-3B85-4973-B978-AE36FB8FCC0C}
+	EndGlobalSection
+EndGlobal
